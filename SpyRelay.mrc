@@ -20,20 +20,22 @@
 ;
 ;   1) connect to the first server
 ;   2) create a new window and login to another irc server
-;   3) use /spy.info command to find out the connection id of the second server
-;      with some luck the second one should just be CID 2
-;   4) Edit this script in the section where it says you should edit it.
+;   3) use /spy to automaticly find the second window
+;
+;   Things you just have to do once (unless you want to add more channels)
+;
+;   1) Edit this script in the section where it says you should edit it.
 ;
 
-alias spy.info {
-    echo -a *** Listing Connection Info ***
-    VAR %ctr = 0
-    VAR %tot = $scon(0)
-    WHILE (%ctr < %tot) {
-        INC %ctr
-        scon %ctr
-        echo -a * Connection %ctr - CID: $cid Status: $status Nick: $me Server: $server
-    }
+alias spy {
+  VAR %ctr = 0
+  VAR %tot = $scon(0)
+  WHILE (%ctr < %tot) {
+    INC %ctr
+    scon %ctr
+    set %server_CID $cid
+  }
+  echo -a Second server CID set as: %server_CID
 }
 
 on *:text:*:#: {
@@ -49,8 +51,6 @@ on *:text:*:#: {
 
    ; Channel that should recieve everything
     VAR %server_channel = #main
-   ;CID of the second server
-    VAR %server_CID = 95
 
    ; ********************************************************************       
    ;     STOP EDIT HERE STOP EDIT HERE STOP EDIT HERE STOP EDIT HERE     
