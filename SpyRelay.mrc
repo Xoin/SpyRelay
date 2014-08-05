@@ -56,7 +56,7 @@ on *:text:*:#: {
    ;     STOP EDIT HERE STOP EDIT HERE STOP EDIT HERE STOP EDIT HERE     
    ; ********************************************************************       
 
-    var %x = %watch_ammount
+    var %x = 1
     while (%x <= %watch_ammount) {
         if ($chan == %watch_channel. [ $+ [ %x ] ]) {
             scid -tM %server_CID msg %server_channel < $+ %watch_channel. [ $+ [ %x ] ] $nick $+ > $1-
